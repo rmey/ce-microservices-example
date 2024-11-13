@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #response {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: white;
+            width: 300px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        async function callService() { 
+            const response = await fetch('/api/call-service');
+            const data = await response.json(); 
+            const message = response.ok ? ` <div class="response-title">Current Time:</div> <div class="response-content">${data.current_time}</div> <div class="response-title">Message of the Day:</div> <div class="response-content">${data.message_of_the_day}</div> ` : 'Backend is not reachable'; 
+            document.getElementById('response').innerHTML = message; }
+    </script>
+</head>
+
+<body>
+    <h1>Frontend Service</h1>
+    <button onclick="callService()">Call Service</button>
+    <p id="response"></p>
+</body>
+
+</html> 
